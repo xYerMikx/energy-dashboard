@@ -1,0 +1,13 @@
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.name {
+  display: block;
+  margin-bottom: 40px;
+  color: $sidebarTextHover;
+  font-size: 20px;
+}
