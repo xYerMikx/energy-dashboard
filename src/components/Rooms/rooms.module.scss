@@ -1,0 +1,10 @@
+.rooms {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 28px;
+
+  & > div {
+    flex: 0 1 25%;
+  }
+}

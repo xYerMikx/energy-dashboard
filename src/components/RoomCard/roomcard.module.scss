@@ -1,0 +1,63 @@
+.card {
+  cursor: pointer;
+
+  transition: all 0.2s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: $white;
+  border-radius: 20px;
+  padding: 28px 20px 16px 20px;
+  box-shadow: 2px 1px 1px 1px $bgColor;
+  aspect-ratio: 1 / 1;
+
+  &:hover {
+    background: $lightBlueBg;
+    & > img {
+      background-color: $darkBlue;
+    }
+    & > div {
+      & > p {
+        color: $white;
+      }
+      & > span {
+        color: $white;
+        opacity: $opacity50;
+      }
+    }
+  }
+}
+.card.selected {
+  background: linear-gradient(337deg, #5667ff 0%, #2396ef 100%);
+
+  & > img {
+    background-color: $darkBlue;
+  }
+
+  & > div {
+    & > p {
+      color: $white;
+    }
+    & > span {
+      color: $white;
+      opacity: $opacity50;
+    }
+  }
+}
+
+.image {
+  background-color: $lightBlueBg;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+}
+.room {
+  margin-top: auto;
+  font-size: 20px;
+}
+.amount {
+  color: $darkText;
+  margin-top: 4px;
+  font-size: 16px;
+}

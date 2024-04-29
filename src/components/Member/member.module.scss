@@ -1,0 +1,18 @@
+.member {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.name {
+  font-size: 20px;
+  color: $darkText;
+}
+.access {
+  color: $darkText;
+  opacity: $opacity50;
+}
