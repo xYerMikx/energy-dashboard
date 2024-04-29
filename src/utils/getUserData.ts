@@ -1,5 +1,5 @@
 import { userApi } from "@/constants/api";
-import { UserApiData } from "@/types/userData.types";
+import { UserApiData } from "@/types/userData";
 import axios from "axios";
 import { cropUser } from "./cropUser";
 
