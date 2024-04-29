@@ -1,3 +1,6 @@
+import { Devices } from "../Devices";
+import { Levels } from "../Levels";
+import { Rooms } from "../Rooms";
 import { Searchbar } from "../Searchbar";
 import styles from "./main.module.scss";
 
@@ -8,6 +11,9 @@ export function Main() {
         <h2 className={styles.title}>Rooms</h2>
         <Searchbar placeholder="Search Anything Here..." />
       </div>
+      <Rooms />
+      <Levels />
+      <Devices />
     </div>
   );
 }
