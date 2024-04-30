@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./card.module.scss";
-import arrowDown from "@/images/arrow-down.svg";
+import { Chart } from "../Chart";
 
 type LevelCardProps = {
   src: string;
@@ -19,7 +21,9 @@ export function LevelCard({ alt, src, type }: LevelCardProps) {
           <option value="Week">Week</option>
         </select>
       </div>
-      <div className={styles.graph}>Graph</div>
+      <div className={styles.graph}>
+        <Chart />
+      </div>
     </div>
   );
 }
