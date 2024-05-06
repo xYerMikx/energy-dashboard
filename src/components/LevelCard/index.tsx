@@ -3,14 +3,25 @@
 import Image from "next/image";
 import styles from "./card.module.scss";
 import { Chart } from "../Chart";
+import { ChartData, ChartOptions } from "chart.js";
 
 type LevelCardProps = {
   src: string;
   alt: string;
   type: string;
+  options: ChartOptions;
+  data: ChartData;
+  chartType: "line" | "bar";
 };
 
-export function LevelCard({ alt, src, type }: LevelCardProps) {
+export function LevelCard({
+  alt,
+  src,
+  type,
+  chartType,
+  data,
+  options,
+}: LevelCardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.row}>
@@ -22,7 +33,7 @@ export function LevelCard({ alt, src, type }: LevelCardProps) {
         </select>
       </div>
       <div className={styles.graph}>
-        <Chart />
+        <Chart type={chartType} data={data} options={options} />
       </div>
     </div>
   );

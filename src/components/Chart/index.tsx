@@ -1,4 +1,3 @@
-import { randomize } from "@/utils/randomize";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,10 +6,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
 } from "chart.js";
 import type { ChartData, ChartOptions } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -19,72 +20,56 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
+  PointElement,
+  LineElement
 );
 
-const options: ChartOptions<"bar"> = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      callbacks: {
-        label: (tooltipItem) => {
-          return tooltipItem.formattedValue + " kW";
-        },
-      },
-    },
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-        drawTicks: false,
-      },
-    },
-    y: {
-      border: {
-        dash: [7, 5],
-        display: false,
-      },
-      ticks: {
-        display: false,
-      },
-    },
-  },
-  onClick: (e, active) => {
-    if (active.length === 0) {
-      //
-    } else {
-      console.log(e);
-    }
-  },
-};
-const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const data: ChartData<"bar"> = {
-  labels,
-  datasets: [
-    {
-      label: "",
-      data: labels.map(randomize),
-      backgroundColor: "#E8F3FC",
-      borderRadius: 4,
-      datalabels: {
-        display: true,
-        color: "#2396ef",
-        anchor: "end",
-        align: "top",
-        offset: -5,
-      },
-    },
-  ],
+type ChartProps = {
+  type: "line" | "bar";
+  options: ChartOptions;
+  data: ChartData;
 };
 
-export function Chart() {
-  return (
-    <div>
-      <Bar options={options} plugins={[ChartDataLabels]} data={data} />
-    </div>
-  );
+const tooltip = {
+  callbacks: {
+    label: (tooltipItem: any) => {
+      return tooltipItem.formattedValue + " kW";
+    },
+  },
+};
+
+export function Chart({ type, data, options }: ChartProps) {
+  const renderChart = (type: "line" | "bar") => {
+    let component;
+    switch (type) {
+      case "line":
+        //@ts-ignore
+        component = <Line options={options} data={data} />;
+        break;
+
+      case "bar":
+        component = (
+          <Bar
+            //@ts-ignore
+            options={{ ...options, plugins: { ...options.plugins, tooltip } }}
+            plugins={[ChartDataLabels]}
+            //@ts-ignore
+            data={data}
+          />
+        );
+        break;
+
+      default:
+        component = (
+          //@ts-ignore
+          <Bar options={options} plugins={[ChartDataLabels]} data={data} />
+        );
+
+        break;
+    }
+    return component;
+  };
+
+  return <div>{renderChart(type)}</div>;
 }
